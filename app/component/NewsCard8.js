@@ -7,7 +7,9 @@ import {
   Animated,
   Dimensions,
   Image,
+  TouchableOpacity,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const ITEM_HEIGHT = Dimensions.get("window").height;
 
@@ -25,7 +27,7 @@ const NewsCard = ({ article }) => (
   </View>
 );
 
-const NewsScrollApp6 = () => {
+const NewsScrollApp8 = () => {
   const [news, setNews] = useState([]);
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
 
@@ -75,6 +77,15 @@ const NewsScrollApp6 = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Ionicons name="menu-outline" size={28} color="white" />
+        <Image
+          style={styles.logo}
+          source={{
+            uri: "https://www.askfundu.com/static/media/askfunduLogo.8d6f3f280186de132173.png",
+          }}
+        />
+      </View>
       <AnimatedFlatList
         data={news}
         keyExtractor={(item) => item._id.toString()}
@@ -87,6 +98,17 @@ const NewsScrollApp6 = () => {
           }
         )}
       />
+      <View style={styles.bottomMenu}>
+        <TouchableOpacity style={styles.bottomMenuItem}>
+          <Ionicons name="home-outline" size={28} color="gray" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.bottomMenuItem}>
+          <Ionicons name="search-outline" size={28} color="gray" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.bottomMenuItem}>
+          <Ionicons name="settings-outline" size={28} color="gray" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -125,6 +147,37 @@ const styles = StyleSheet.create({
   summary: {
     fontSize: 18,
   },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "lightblue",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  logo: {
+    width: 100,
+    height: 40,
+  },
+  bottomMenu: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    backgroundColor: "#f2f2f2",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  bottomMenuItem: {
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  bottomMenuIcon: {
+    marginBottom: 5,
+  },
+  bottomMenuText: {
+    fontSize: 12,
+    fontWeight: "bold",
+  },
 });
 
-export default NewsScrollApp6;
+export default NewsScrollApp8;

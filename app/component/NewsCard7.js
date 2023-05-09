@@ -7,7 +7,9 @@ import {
   Animated,
   Dimensions,
   Image,
+  TouchableOpacity,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 const ITEM_HEIGHT = Dimensions.get("window").height;
 
@@ -15,9 +17,7 @@ const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 const NewsCard = ({ article }) => (
   <View style={styles.card}>
-    {/* <View style={styles.image}> */}
     <Image style={styles.image} source={{ uri: article.Image_link }} />
-    {/* </View> */}
     <View style={styles.textContainer}>
       <Text style={styles.headline}>{article.Headline}</Text>
       <Text style={styles.summary}>{article.Summary}</Text>
@@ -25,7 +25,7 @@ const NewsCard = ({ article }) => (
   </View>
 );
 
-const NewsScrollApp6 = () => {
+const NewsCard7 = () => {
   const [news, setNews] = useState([]);
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
 
@@ -75,6 +75,15 @@ const NewsScrollApp6 = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.header}>
+        <Ionicons name="menu-outline" size={28} color="white" />
+        <Image
+          style={styles.logo}
+          source={{
+            uri: "https://cdn.pixabay.com/photo/2016/10/25/22/55/lion-1776755_960_720.png",
+          }}
+        />
+      </View>
       <AnimatedFlatList
         data={news}
         keyExtractor={(item) => item._id.toString()}
@@ -87,44 +96,55 @@ const NewsScrollApp6 = () => {
           }
         )}
       />
+      <View style={styles.bottomMenu}>
+        <TouchableOpacity style={styles.bottomMenuItem}>
+          <Ionicons name="home-outline" size={28} color="gray" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.bottomMenuItem}>
+          <Ionicons name="search-outline" size={28} color="gray" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.bottomMenuItem}>
+          <Ionicons name="settings-outline" size={28} color="gray" />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
-    paddingHorizontal: 2,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#1a1a1a",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  logo: {
+    width: 100,
+    height: 40,
+  },
+  bottomMenu: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    backgroundColor: "#f2f2f2",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  bottomMenuItem: {
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  bottomMenuIcon: {
     marginBottom: 5,
   },
-  card: {
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 10,
-    padding: 20,
-    backgroundColor: "#fff",
-    height: ITEM_HEIGHT,
-    // marginBottom: 20,
-  },
-  image: {
-    width: "100%",
-    height: 200,
-    backgroundColor: "#eee",
-    marginBottom: 10,
-  },
-  textContainer: {
-    flex: 1,
-    justifyContent: "center",
-  },
-  headline: {
-    fontSize: 24,
+  bottomMenuText: {
+    fontSize: 12,
     fontWeight: "bold",
-    marginBottom: 10,
-  },
-  summary: {
-    fontSize: 18,
   },
 });
 
-export default NewsScrollApp6;
+export default NewsCard7;
