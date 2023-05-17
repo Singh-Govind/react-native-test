@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const Bottom = () => {
   const { handleWebViewSettings } = useContext(AppContext);
@@ -22,8 +23,11 @@ const Bottom = () => {
         }
         style={styles.bottomMenuItem}
       >
-        <Text style={{ fontSize: 26 }}>Go to askfundu.com</Text>
-        {/* <Ionicons name="home-outline" size={25} color="gray" />
+        <Text style={{ fontSize: 16, color: "white", marginRight: 10 }}>
+          Go to askFundu.com
+        </Text>
+        <Icon name="share-square-o" size={22} color="white" />
+        {/* 
       </TouchableOpacity>
       <TouchableOpacity style={styles.bottomMenuItem}>
         <Ionicons name="search-outline" size={25} color="gray" />
@@ -40,12 +44,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    backgroundColor: "#f2f2f2",
+    backgroundColor: "#5d20d2",
     paddingVertical: 10,
     paddingHorizontal: 20,
+    marginRight: 5,
+    marginLeft: 5,
+    borderRadius: 8,
+    marginBottom: 10,
   },
   bottomMenuItem: {
-    flexDirection: "column",
+    flexDirection: "row",
     alignItems: "center",
   },
   bottomMenuIcon: {

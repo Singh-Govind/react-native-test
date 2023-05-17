@@ -150,13 +150,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   positive: {
-    backgroundColor: "#4caf50", // Positive sentiment color
+    backgroundColor: "#08a745", // Positive sentiment color
   },
   negative: {
-    backgroundColor: "#f44336", // Negative sentiment color
+    backgroundColor: "#cc3d3f", // Negative sentiment color
   },
   neutral: {
-    backgroundColor: "#2196f3", // Neutral sentiment color
+    backgroundColor: "#f8c361", // Neutral sentiment color
   },
 });
 
