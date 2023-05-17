@@ -6,13 +6,18 @@ import {
   TouchableOpacity,
   Linking,
   Image,
+  Share,
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { Feather } from "@expo/vector-icons";
+import { AppContext } from "../context/AppContext";
 
 const WINDOW_HEIGHT = Dimensions.get("window").height - 60;
 
 const NewsCard = ({ item }) => {
+  const { handleWebViewSettings } = useContext(AppContext);
+
+  // this is for getting button style
   const getButtonStyle = () => {
     if (item?.Sentiment === "Positive") {
       return [styles.button, styles.positive];
@@ -22,6 +27,28 @@ const NewsCard = ({ item }) => {
       return [styles.button, styles.neutral];
     }
     return styles.button;
+  };
+
+  const shareContent = async (link, title) => {
+    try {
+      const result = await Share.share({
+        message: `Check out this link: ${link}`,
+        url: "link",
+        title: "title",
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // Shared with activity type of result.activityType
+          console.log("result shared", result);
+        } else {
+          // Shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // Dismissed
+      }
+    } catch (error) {
+      console.log("Error sharing:", error.message);
+    }
   };
 
   return (
@@ -39,16 +66,21 @@ const NewsCard = ({ item }) => {
           Published by:{" "}
           <Text
             style={{ textDecorationLine: "underline" }}
-            onPress={() =>
-              Linking.openURL(item?.Link).catch((err) =>
-                console.error("Failed to open link:", err)
-              )
-            }
+            onPress={() => {
+              handleWebViewSettings(item?.Link);
+              // Linking.openURL(item?.Link).catch((err) =>
+              //   console.error("Failed to open link:", err)
+              // );
+            }}
           >
             {item?.Domain}
           </Text>
         </Text>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            shareContent(`https://askfundu.com/news/${item._id}`, item.Headline)
+          }
+        >
           <Feather name="send" size={24} color="black" />
         </TouchableOpacity>
       </View>
@@ -91,6 +123,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   summary: {
+    // flex: 1,
     fontSize: 16,
     fontFamily: "Roboto",
     color: "#666",

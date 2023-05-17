@@ -5,7 +5,8 @@ import { Ionicons } from "@expo/vector-icons";
 const Header = () => {
   return (
     <View style={styles.header}>
-      <Ionicons name="menu-outline" size={28} color="black" />
+      {/* <Ionicons name="menu-outline" size={28} color="black" /> */}
+      <View></View>
       <Image
         style={styles.logo}
         source={{
@@ -19,22 +20,22 @@ const Header = () => {
 
 const styles = StyleSheet.create({
   header: {
-    marginTop: StatusBar.length,
+    marginTop: StatusBar.length + 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "white",
-    paddingTop: 40,
-    paddingBottom: 10,
+    // paddingTop: 20,
+    // paddingBottom: 10,
     paddingHorizontal: 20,
     borderBottomColor: "black",
     borderBottomWidth: 0.5,
-    paddingVertical: 20,
+    paddingVertical: 10,
   },
   logo: {
     width: 100,
     height: 40,
-    marginLeft: -28,
+    // marginLeft: -28,
   },
 });
 
