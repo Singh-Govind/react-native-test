@@ -12,6 +12,7 @@ import WebView from "react-native-webview";
 import Header from "./src/components/Header";
 import NewsScreen from "./src/screens/NewsScreen";
 import Bottom from "./src/components/Bottom";
+import Login from "./src/components/Login";
 
 const WINDOW_WIDTH = Dimensions.get("window").width;
 
@@ -21,7 +22,8 @@ export default function App() {
 
   return (
     <>
-      {webViewOpener ? (
+      <Login />
+      {/* {webViewOpener ? (
         <View style={styles.webView}>
           <TouchableOpacity
             onPress={() => {
@@ -51,7 +53,7 @@ export default function App() {
           </View>
           <Bottom />
         </>
-      )}
+      )} */}
     </>
   );
 }
